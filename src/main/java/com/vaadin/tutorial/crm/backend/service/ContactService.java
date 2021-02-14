@@ -26,8 +26,12 @@ public class ContactService {
         this.contactRepository = contactRepository;
         this.companyRepository = companyRepository;
     }
-    public List<Contact> findAll() {
-        return contactRepository.findAll();
+    public List<Contact> findAll(String searchText) {
+        if (searchText == null || searchText.isEmpty()){
+            return contactRepository.findAll();
+        }else{
+            return contactRepository.search(searchText);
+        }
     }
     public long count() {
         return contactRepository.count();
